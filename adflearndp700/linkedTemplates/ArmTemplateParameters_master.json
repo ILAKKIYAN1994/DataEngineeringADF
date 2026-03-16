@@ -1,0 +1,231 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adflearndp700"
+		},
+		"DS9_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS10_ADLSCSV_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS10_ADLSPARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS11_ADLSCSV_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS13_ADLSCSV_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS14_SQLTABLE_INPUT_password": {
+			"value": ""
+		},
+		"LS15_ADLSCSV_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS16_ADLSCSV_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS16_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS17_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS18_ADLSFOLDER_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS18_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS1_ADLS_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS1_BLOB_EXCEL_INPUT_connectionString": {
+			"value": ""
+		},
+		"LS2_ADLS_CSV_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS2_ADLS_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS3_ADLS_PARQUET_INPUT_accountKey": {
+			"value": ""
+		},
+		"LS3_SQL_TABLE_INPUT_password": {
+			"value": ""
+		},
+		"LS4_ADLS_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS5_ADLS_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_password": {
+			"value": ""
+		},
+		"LS7_ADLS_CSV_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_password": {
+			"value": ""
+		},
+		"LS7_SQL_TABLE_INPUT_password": {
+			"value": ""
+		},
+		"LS8_ADLS_PARQUET_OUTPUT_accountKey": {
+			"value": ""
+		},
+		"LS9_ADLSCSV_INPUT_accountKey": {
+			"value": ""
+		},
+		"ADLSKEYVAULT_properties_typeProperties_baseUrl": {
+			"value": "https://kvlearndp700.vault.azure.net/"
+		},
+		"DS9_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"KV8_AZURE_SQL_INPUT_properties_typeProperties_baseUrl": {
+			"value": "https://kvlearndp700.vault.azure.net/"
+		},
+		"LS10_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS10_ADLSPARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS11_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_server": {
+			"value": "azuresqldb-learndp700.database.windows.net"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_database": {
+			"value": "testdb_learndp700"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_userName": {
+			"value": "adminroot"
+		},
+		"LS13_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_database": {
+			"value": "AdventureWorks2025"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_userName": {
+			"value": "azure"
+		},
+		"LS15_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS16_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS16_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS17_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net"
+		},
+		"LS17_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS18_ADLSFOLDER_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS18_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS1_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net"
+		},
+		"LS2_ADLS_CSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS2_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS3_ADLS_PARQUET_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_database": {
+			"value": "AdventureWorks2025"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+			"value": "azure"
+		},
+		"LS4_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS4_RESTAPI_JSON_INPUT_properties_typeProperties_url": {
+			"value": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS5_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS5_RESTAPI_JSON_INPUT_properties_typeProperties_url": {
+			"value": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_database": {
+			"value": "Azure1"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_userName": {
+			"value": "azure"
+		},
+		"LS7_ADLS_CSV_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_database": {
+			"value": "Azure1"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_userName": {
+			"value": "azure"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_server": {
+			"value": "localhost\\SQLEXPRESS"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_database": {
+			"value": "AdventureWorks2025"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+			"value": "azure"
+		},
+		"LS8_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_server": {
+			"value": "azuresqldb-learndp700.database.windows.net"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_database": {
+			"value": "testdb_learndp700"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_userName": {
+			"value": "adminroot"
+		},
+		"LS9_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"value": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

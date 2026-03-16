@@ -1,0 +1,697 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adflearndp700"
+		},
+		"LS14_SQLTABLE_INPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS14_SQLTABLE_INPUT'"
+		},
+		"LS3_SQL_TABLE_INPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS3_SQL_TABLE_INPUT'"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS6_SQL_ONPREM_LINKED_INPUTOUTPUT'"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS7_SQL_SP_INPUTOUTPUT'"
+		},
+		"LS7_SQL_TABLE_INPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS7_SQL_TABLE_INPUT'"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuresqldb-learndp700.database.windows.net"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "testdb_learndp700"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminroot"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2025"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS17_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2025"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Azure1"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Azure1"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2025"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuresqldb-learndp700.database.windows.net"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "testdb_learndp700"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminroot"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS3_ADLS_PARQUET_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS3_ADLS_PARQUET_INPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "pl3output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS4_ADLS_PARQUET_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS4_ADLS_PARQUET_OUTPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "pl4output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS4_RESTAPI_JSON_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS4_RESTAPI_JSON_INPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS5_ADLS_PARQUET_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS5_ADLS_PARQUET_OUTPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "pl5output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS5_RESTAPI_JSON_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS5_RESTAPI_JSON_INPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS7_ADLS_CSV_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS7_ADLS_CSV_OUTPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "pl7output"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS8_ADLS_PARQUET_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS8_ADLS_PARQUET_OUTPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "pl8output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS9_ADLSCSV_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS9_ADLSCSV_INPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "pl9input"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "SIC_Code",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS9_PARQUET_OUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DS9_PARQUET_OUTPUT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "pl9output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS12_AZURESQL_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('LS12_AZURESQL_INPUT_properties_typeProperties_server')]",
+					"database": "[parameters('LS12_AZURESQL_INPUT_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS12_AZURESQL_INPUT_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "KV8_AZURE_SQL_INPUT",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "KVSECAZURESQL"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS14_SQLTABLE_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS14_SQLTABLE_INPUT_properties_typeProperties_server')]",
+					"database": "[parameters('LS14_SQLTABLE_INPUT_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS14_SQLTABLE_INPUT_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS14_SQLTABLE_INPUT_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "IR-SELF-AZURE1DB",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS17_ADLSCSV_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS17_ADLSCSV_INPUT_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ADLSKEYVAULT",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "AZUREADLSSECRET"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS3_SQL_TABLE_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS3_SQL_TABLE_INPUT_properties_typeProperties_server')]",
+					"database": "[parameters('LS3_SQL_TABLE_INPUT_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS3_SQL_TABLE_INPUT_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS3_SQL_TABLE_INPUT_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "IR-SELF-AZURE1DB",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS6_SQL_ONPREM_LINKED_INPUTOUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_server')]",
+					"database": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "IR-SELF-AZURE1DB",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS7_SQL_SP_INPUTOUTPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_server')]",
+					"database": "[parameters('LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS7_SQL_SP_INPUTOUTPUT_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "IR-SELF-AZURE1DB",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS7_SQL_TABLE_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('LS7_SQL_TABLE_INPUT_properties_typeProperties_server')]",
+					"database": "[parameters('LS7_SQL_TABLE_INPUT_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS7_SQL_TABLE_INPUT_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LS7_SQL_TABLE_INPUT_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "IR-SELF-AZURE1DB",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS8_AZURE_SQL_INPUT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('LS8_AZURE_SQL_INPUT_properties_typeProperties_server')]",
+					"database": "[parameters('LS8_AZURE_SQL_INPUT_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('LS8_AZURE_SQL_INPUT_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "KV8_AZURE_SQL_INPUT",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "KVSECAZURESQL"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL10_TRIGGERCSV_PARQUET')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "We used csv file as an input folder in ADLS and copied the data to ADLS in Parquet format. However we configured the Scheduled Trigger that starts at fixed time everyday and attached it to the pipeline. Activity Used: Copy Data(with Trigger)",
+				"activities": [
+					{
+						"name": "CPY_CSV_PARQUET",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS10_ADLSCSV_INPUT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS10_ADLSPARQUET_OUTPUT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-03-13T13:50:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL11_LOOKUP_ADLSCSV')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "We used csv file as an input folder in ADLS and used Lookup activity to view the files present in it. Activity Used: Lookup",
+				"activities": [
+					{
+						"name": "Look the csv file",
+						"type": "Lookup",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"dataset": {
+								"referenceName": "DS11_ADLSCSV_INPUT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"firstRowOnly": false
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-03-15T06:05:00Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL13_GETMETADATA_CHILDITEMS_ADLSCSV')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "We used 2 csv files as an input folder in ADLS and used Get Metadata activity to view the files present in it. Activity Used: Get Metadata",
+				"activities": [
+					{
+						"name": "Get Metadata for CSV ADLS",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DS13_ADLSCSV_INPUT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-03-15T07:00:51Z"
+			},
+			"dependsOn": []
+		}
+	]
+}

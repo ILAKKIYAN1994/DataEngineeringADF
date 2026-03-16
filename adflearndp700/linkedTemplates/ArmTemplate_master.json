@@ -1,0 +1,626 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adflearndp700"
+		},
+		"DS9_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'DS9_PARQUET_OUTPUT'"
+		},
+		"LS10_ADLSCSV_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS10_ADLSCSV_INPUT'"
+		},
+		"LS10_ADLSPARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS10_ADLSPARQUET_OUTPUT'"
+		},
+		"LS11_ADLSCSV_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS11_ADLSCSV_INPUT'"
+		},
+		"LS13_ADLSCSV_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS13_ADLSCSV_INPUT'"
+		},
+		"LS14_SQLTABLE_INPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS14_SQLTABLE_INPUT'"
+		},
+		"LS15_ADLSCSV_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS15_ADLSCSV_INPUT'"
+		},
+		"LS16_ADLSCSV_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS16_ADLSCSV_INPUT'"
+		},
+		"LS16_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS16_PARQUET_OUTPUT'"
+		},
+		"LS17_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS17_PARQUET_OUTPUT'"
+		},
+		"LS18_ADLSFOLDER_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS18_ADLSFOLDER_INPUT'"
+		},
+		"LS18_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS18_PARQUET_OUTPUT'"
+		},
+		"LS1_ADLS_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS1_ADLS_PARQUET_OUTPUT'"
+		},
+		"LS1_BLOB_EXCEL_INPUT_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS1_BLOB_EXCEL_INPUT'"
+		},
+		"LS2_ADLS_CSV_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS2_ADLS_CSV_INPUT'"
+		},
+		"LS2_ADLS_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS2_ADLS_PARQUET_OUTPUT'"
+		},
+		"LS3_ADLS_PARQUET_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS3_ADLS_PARQUET_INPUT'"
+		},
+		"LS3_SQL_TABLE_INPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS3_SQL_TABLE_INPUT'"
+		},
+		"LS4_ADLS_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS4_ADLS_PARQUET_OUTPUT'"
+		},
+		"LS5_ADLS_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS5_ADLS_PARQUET_OUTPUT'"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS6_SQL_ONPREM_LINKED_INPUTOUTPUT'"
+		},
+		"LS7_ADLS_CSV_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS7_ADLS_CSV_OUTPUT'"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS7_SQL_SP_INPUTOUTPUT'"
+		},
+		"LS7_SQL_TABLE_INPUT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS7_SQL_TABLE_INPUT'"
+		},
+		"LS8_ADLS_PARQUET_OUTPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS8_ADLS_PARQUET_OUTPUT'"
+		},
+		"LS9_ADLSCSV_INPUT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS9_ADLSCSV_INPUT'"
+		},
+		"ADLSKEYVAULT_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvlearndp700.vault.azure.net/"
+		},
+		"DS9_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"KV8_AZURE_SQL_INPUT_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://kvlearndp700.vault.azure.net/"
+		},
+		"LS10_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS10_ADLSPARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS11_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuresqldb-learndp700.database.windows.net"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "testdb_learndp700"
+		},
+		"LS12_AZURESQL_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminroot"
+		},
+		"LS13_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2025"
+		},
+		"LS14_SQLTABLE_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS15_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS16_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS16_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS17_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net"
+		},
+		"LS17_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS18_ADLSFOLDER_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS18_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS1_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net"
+		},
+		"LS2_ADLS_CSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS2_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS3_ADLS_PARQUET_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2025"
+		},
+		"LS3_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS4_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS4_RESTAPI_JSON_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS5_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS5_RESTAPI_JSON_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Azure1"
+		},
+		"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS7_ADLS_CSV_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Azure1"
+		},
+		"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "localhost\\SQLEXPRESS"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2025"
+		},
+		"LS7_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "azure"
+		},
+		"LS8_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "azuresqldb-learndp700.database.windows.net"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "testdb_learndp700"
+		},
+		"LS8_AZURE_SQL_INPUT_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminroot"
+		},
+		"LS9_ADLSCSV_INPUT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlslearndp700.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adflearndp700_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"DS9_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('DS9_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS10_ADLSCSV_INPUT_accountKey": {
+						"value": "[parameters('LS10_ADLSCSV_INPUT_accountKey')]"
+					},
+					"LS10_ADLSPARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS10_ADLSPARQUET_OUTPUT_accountKey')]"
+					},
+					"LS11_ADLSCSV_INPUT_accountKey": {
+						"value": "[parameters('LS11_ADLSCSV_INPUT_accountKey')]"
+					},
+					"LS13_ADLSCSV_INPUT_accountKey": {
+						"value": "[parameters('LS13_ADLSCSV_INPUT_accountKey')]"
+					},
+					"LS15_ADLSCSV_INPUT_accountKey": {
+						"value": "[parameters('LS15_ADLSCSV_INPUT_accountKey')]"
+					},
+					"LS16_ADLSCSV_INPUT_accountKey": {
+						"value": "[parameters('LS16_ADLSCSV_INPUT_accountKey')]"
+					},
+					"LS16_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS16_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS17_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS17_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS18_ADLSFOLDER_INPUT_accountKey": {
+						"value": "[parameters('LS18_ADLSFOLDER_INPUT_accountKey')]"
+					},
+					"LS18_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS18_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS1_ADLS_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS1_ADLS_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS1_BLOB_EXCEL_INPUT_connectionString": {
+						"value": "[parameters('LS1_BLOB_EXCEL_INPUT_connectionString')]"
+					},
+					"LS2_ADLS_CSV_INPUT_accountKey": {
+						"value": "[parameters('LS2_ADLS_CSV_INPUT_accountKey')]"
+					},
+					"LS2_ADLS_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS2_ADLS_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS3_ADLS_PARQUET_INPUT_accountKey": {
+						"value": "[parameters('LS3_ADLS_PARQUET_INPUT_accountKey')]"
+					},
+					"LS4_ADLS_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS4_ADLS_PARQUET_OUTPUT_accountKey')]"
+					},
+					"ADLSKEYVAULT_properties_typeProperties_baseUrl": {
+						"value": "[parameters('ADLSKEYVAULT_properties_typeProperties_baseUrl')]"
+					},
+					"DS9_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('DS9_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"KV8_AZURE_SQL_INPUT_properties_typeProperties_baseUrl": {
+						"value": "[parameters('KV8_AZURE_SQL_INPUT_properties_typeProperties_baseUrl')]"
+					},
+					"LS10_ADLSCSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS10_ADLSCSV_INPUT_properties_typeProperties_url')]"
+					},
+					"LS10_ADLSPARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS10_ADLSPARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS11_ADLSCSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS11_ADLSCSV_INPUT_properties_typeProperties_url')]"
+					},
+					"LS13_ADLSCSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS13_ADLSCSV_INPUT_properties_typeProperties_url')]"
+					},
+					"LS15_ADLSCSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS15_ADLSCSV_INPUT_properties_typeProperties_url')]"
+					},
+					"LS16_ADLSCSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS16_ADLSCSV_INPUT_properties_typeProperties_url')]"
+					},
+					"LS16_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS16_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS17_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS17_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS18_ADLSFOLDER_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS18_ADLSFOLDER_INPUT_properties_typeProperties_url')]"
+					},
+					"LS18_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS18_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS1_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS1_ADLS_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS2_ADLS_CSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS2_ADLS_CSV_INPUT_properties_typeProperties_url')]"
+					},
+					"LS2_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS2_ADLS_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS3_ADLS_PARQUET_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS3_ADLS_PARQUET_INPUT_properties_typeProperties_url')]"
+					},
+					"LS4_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS4_ADLS_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS4_RESTAPI_JSON_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS4_RESTAPI_JSON_INPUT_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adflearndp700_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS5_ADLS_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS5_ADLS_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS7_ADLS_CSV_OUTPUT_accountKey": {
+						"value": "[parameters('LS7_ADLS_CSV_OUTPUT_accountKey')]"
+					},
+					"LS8_ADLS_PARQUET_OUTPUT_accountKey": {
+						"value": "[parameters('LS8_ADLS_PARQUET_OUTPUT_accountKey')]"
+					},
+					"LS9_ADLSCSV_INPUT_accountKey": {
+						"value": "[parameters('LS9_ADLSCSV_INPUT_accountKey')]"
+					},
+					"LS5_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS5_ADLS_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS5_RESTAPI_JSON_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS5_RESTAPI_JSON_INPUT_properties_typeProperties_url')]"
+					},
+					"LS7_ADLS_CSV_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS7_ADLS_CSV_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS8_ADLS_PARQUET_OUTPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS8_ADLS_PARQUET_OUTPUT_properties_typeProperties_url')]"
+					},
+					"LS9_ADLSCSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS9_ADLSCSV_INPUT_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adflearndp700_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adflearndp700_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS14_SQLTABLE_INPUT_password": {
+						"value": "[parameters('LS14_SQLTABLE_INPUT_password')]"
+					},
+					"LS3_SQL_TABLE_INPUT_password": {
+						"value": "[parameters('LS3_SQL_TABLE_INPUT_password')]"
+					},
+					"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_password": {
+						"value": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_password')]"
+					},
+					"LS7_SQL_SP_INPUTOUTPUT_password": {
+						"value": "[parameters('LS7_SQL_SP_INPUTOUTPUT_password')]"
+					},
+					"LS7_SQL_TABLE_INPUT_password": {
+						"value": "[parameters('LS7_SQL_TABLE_INPUT_password')]"
+					},
+					"LS12_AZURESQL_INPUT_properties_typeProperties_server": {
+						"value": "[parameters('LS12_AZURESQL_INPUT_properties_typeProperties_server')]"
+					},
+					"LS12_AZURESQL_INPUT_properties_typeProperties_database": {
+						"value": "[parameters('LS12_AZURESQL_INPUT_properties_typeProperties_database')]"
+					},
+					"LS12_AZURESQL_INPUT_properties_typeProperties_userName": {
+						"value": "[parameters('LS12_AZURESQL_INPUT_properties_typeProperties_userName')]"
+					},
+					"LS14_SQLTABLE_INPUT_properties_typeProperties_server": {
+						"value": "[parameters('LS14_SQLTABLE_INPUT_properties_typeProperties_server')]"
+					},
+					"LS14_SQLTABLE_INPUT_properties_typeProperties_database": {
+						"value": "[parameters('LS14_SQLTABLE_INPUT_properties_typeProperties_database')]"
+					},
+					"LS14_SQLTABLE_INPUT_properties_typeProperties_userName": {
+						"value": "[parameters('LS14_SQLTABLE_INPUT_properties_typeProperties_userName')]"
+					},
+					"LS17_ADLSCSV_INPUT_properties_typeProperties_url": {
+						"value": "[parameters('LS17_ADLSCSV_INPUT_properties_typeProperties_url')]"
+					},
+					"LS3_SQL_TABLE_INPUT_properties_typeProperties_server": {
+						"value": "[parameters('LS3_SQL_TABLE_INPUT_properties_typeProperties_server')]"
+					},
+					"LS3_SQL_TABLE_INPUT_properties_typeProperties_database": {
+						"value": "[parameters('LS3_SQL_TABLE_INPUT_properties_typeProperties_database')]"
+					},
+					"LS3_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+						"value": "[parameters('LS3_SQL_TABLE_INPUT_properties_typeProperties_userName')]"
+					},
+					"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_server": {
+						"value": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_server')]"
+					},
+					"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_database": {
+						"value": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_database')]"
+					},
+					"LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_userName": {
+						"value": "[parameters('LS6_SQL_ONPREM_LINKED_INPUTOUTPUT_properties_typeProperties_userName')]"
+					},
+					"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_server": {
+						"value": "[parameters('LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_server')]"
+					},
+					"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_database": {
+						"value": "[parameters('LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_database')]"
+					},
+					"LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_userName": {
+						"value": "[parameters('LS7_SQL_SP_INPUTOUTPUT_properties_typeProperties_userName')]"
+					},
+					"LS7_SQL_TABLE_INPUT_properties_typeProperties_server": {
+						"value": "[parameters('LS7_SQL_TABLE_INPUT_properties_typeProperties_server')]"
+					},
+					"LS7_SQL_TABLE_INPUT_properties_typeProperties_database": {
+						"value": "[parameters('LS7_SQL_TABLE_INPUT_properties_typeProperties_database')]"
+					},
+					"LS7_SQL_TABLE_INPUT_properties_typeProperties_userName": {
+						"value": "[parameters('LS7_SQL_TABLE_INPUT_properties_typeProperties_userName')]"
+					},
+					"LS8_AZURE_SQL_INPUT_properties_typeProperties_server": {
+						"value": "[parameters('LS8_AZURE_SQL_INPUT_properties_typeProperties_server')]"
+					},
+					"LS8_AZURE_SQL_INPUT_properties_typeProperties_database": {
+						"value": "[parameters('LS8_AZURE_SQL_INPUT_properties_typeProperties_database')]"
+					},
+					"LS8_AZURE_SQL_INPUT_properties_typeProperties_userName": {
+						"value": "[parameters('LS8_AZURE_SQL_INPUT_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adflearndp700_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "adflearndp700_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adflearndp700_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "adflearndp700_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adflearndp700_ArmTemplate_3')]"
+			]
+		}
+	]
+}
