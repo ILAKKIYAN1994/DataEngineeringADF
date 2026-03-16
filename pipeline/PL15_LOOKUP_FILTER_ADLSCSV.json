@@ -1,0 +1,65 @@
+{
+	"name": "PL15_LOOKUP_FILTER_ADLSCSV",
+	"properties": {
+		"description": "We used csv file as an input in ADLS and used Lookup activity and filtered to view the entries in it. Activity Used: Lookup, Filter",
+		"activities": [
+			{
+				"name": "Look the csv file",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DS15_ADLSCSV_INPUT",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Filter specified row",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Look the csv file",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Look the csv file').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@equals(item().SIC_Code,'1120')\r\n",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-03-15T09:06:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "DS10_ADLSPARQUET_OUTPUT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS10_ADLSPARQUET_OUTPUT",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "pl10output"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

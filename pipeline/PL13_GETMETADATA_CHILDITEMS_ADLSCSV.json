@@ -1,0 +1,41 @@
+{
+	"name": "PL13_GETMETADATA_CHILDITEMS_ADLSCSV",
+	"properties": {
+		"description": "We used 2 csv files as an input folder in ADLS and used Get Metadata activity to view the files present in it. Activity Used: Get Metadata",
+		"activities": [
+			{
+				"name": "Get Metadata for CSV ADLS",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS13_ADLSCSV_INPUT",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-03-15T07:00:51Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

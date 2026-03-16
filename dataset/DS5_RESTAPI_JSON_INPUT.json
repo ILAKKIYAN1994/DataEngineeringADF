@@ -1,0 +1,13 @@
+{
+	"name": "DS5_RESTAPI_JSON_INPUT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS5_RESTAPI_JSON_INPUT",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

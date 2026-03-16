@@ -1,0 +1,66 @@
+{
+	"name": "Pl18_FOREACH_DELETION_ADLS",
+	"properties": {
+		"activities": [
+			{
+				"name": "Loop non CSV files",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.fileList",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Delete non CSV files",
+							"type": "Delete",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "DS18_ADLSFOLDER_INPUT",
+									"type": "DatasetReference"
+								},
+								"logStorageSettings": {
+									"linkedServiceName": {
+										"referenceName": "LS18_PARQUET_OUTPUT",
+										"type": "LinkedServiceReference"
+									},
+									"path": "pl18output"
+								},
+								"enableLogging": true,
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": {
+										"value": "@item().name",
+										"type": "Expression"
+									},
+									"enablePartitionDiscovery": false
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"fileList": {
+				"type": "array",
+				"defaultValue": []
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-16T08:01:36Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

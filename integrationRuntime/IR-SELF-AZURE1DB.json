@@ -1,0 +1,7 @@
+{
+	"name": "IR-SELF-AZURE1DB",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "This connects the self-hosted local SQLEXPRESS Azure1 Database."
+	}
+}

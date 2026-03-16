@@ -1,0 +1,195 @@
+{
+	"name": "PL7_STOREDPROC_AUDITLOG",
+	"properties": {
+		"description": "We created table and stored procedure in local SQL and push data into SQL table using Stored Procedure in ADF. Based on the success or failure, we log the result. Activity Used: Stored Procedure, Success and Failure activity.",
+		"activities": [
+			{
+				"name": "CPY_SQL_CSV",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS7_SQL_TABLE_INPUT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS7_ADLS_CSV_OUTPUT",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "usp_audit_successlog",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "CPY_SQL_CSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[audit].[loadstatus]",
+					"storedProcedureParameters": {
+						"dataread": {
+							"value": {
+								"value": "@activity('CPY_SQL_CSV').output.dataread",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"errorid": {
+							"value": null,
+							"type": "String"
+						},
+						"errormessage": {
+							"value": null,
+							"type": "String"
+						},
+						"loadstatus": {
+							"value": {
+								"value": "@activity('CPY_SQL_CSV').output.executionDetails[0].status\n",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"TableName": {
+							"value": {
+								"value": "@concat(pipeline().parameters.schemaname,'_',pipeline().parameters.tablename)\n",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS7_SQL_SP_INPUTOUTPUT",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "usp_audit_errorlog",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "CPY_SQL_CSV",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[audit].[loadstatus]",
+					"storedProcedureParameters": {
+						"dataread": {
+							"value": {
+								"value": "@activity('CPY_SQL_CSV').output.dataread",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"errorid": {
+							"value": {
+								"value": "@activity('CPY_SQL_CSV').output.errors[0].code",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"errormessage": {
+							"value": {
+								"value": "@activity('CPY_SQL_CSV').output.errors[0].message",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"loadstatus": {
+							"value": {
+								"value": "@activity('CPY_SQL_CSV').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"TableName": {
+							"value": {
+								"value": "@concat(pipeline().parameters.schemaname,'_',pipeline().parameters.tablename)",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS7_SQL_SP_INPUTOUTPUT",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"schemaname": {
+				"type": "string",
+				"defaultValue": "audit"
+			},
+			"tablename": {
+				"type": "string",
+				"defaultValue": "audit.copylog"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-11T12:39:24Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

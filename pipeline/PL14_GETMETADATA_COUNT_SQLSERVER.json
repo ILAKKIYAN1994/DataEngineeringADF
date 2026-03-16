@@ -1,0 +1,33 @@
+{
+	"name": "PL14_GETMETADATA_COUNT_SQLSERVER",
+	"properties": {
+		"description": "We used SQL Server person.person as an input folder and used Get Metadata activity to view the files present in it. Activity Used: Get Metadata",
+		"activities": [
+			{
+				"name": "Get Metadata for SQL Server",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS14_SQLTABLE_INPUT",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"columnCount"
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-03-15T07:00:52Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

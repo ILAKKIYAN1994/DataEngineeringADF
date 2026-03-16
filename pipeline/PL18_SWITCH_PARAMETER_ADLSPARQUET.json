@@ -1,0 +1,179 @@
+{
+	"name": "PL18_SWITCH_PARAMETER_ADLSPARQUET",
+	"properties": {
+		"description": "We used Switch Activity to move between copy or delete activity based on parameters passed. Copy activity copies CSV as Parquet whereas Delete activity deletes all file except CSV in the parent folder. Activity Used: Switch, Copy, Delete.",
+		"activities": [
+			{
+				"name": "Switch Copy or Delete",
+				"type": "Switch",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@pipeline().parameters.Action",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "Copy",
+							"activities": [
+								{
+									"name": "CPY_CSV_PARQUET",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "DelimitedTextSource",
+											"storeSettings": {
+												"type": "AzureBlobFSReadSettings",
+												"recursive": true,
+												"wildcardFileName": "*.csv",
+												"enablePartitionDiscovery": false
+											},
+											"formatSettings": {
+												"type": "DelimitedTextReadSettings"
+											}
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "DS18_ADLSFOLDER_INPUT",
+											"type": "DatasetReference"
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "DS18_PARQUET_OUTPUT",
+											"type": "DatasetReference"
+										}
+									]
+								}
+							]
+						},
+						{
+							"value": "Delete",
+							"activities": [
+								{
+									"name": "Get files present",
+									"type": "GetMetadata",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "DS18_ADLSFOLDER_INPUT",
+											"type": "DatasetReference"
+										},
+										"fieldList": [
+											"childItems"
+										],
+										"storeSettings": {
+											"type": "AzureBlobFSReadSettings",
+											"recursive": true,
+											"enablePartitionDiscovery": false
+										},
+										"formatSettings": {
+											"type": "DelimitedTextReadSettings"
+										}
+									}
+								},
+								{
+									"name": "Filters all files except CSV",
+									"type": "Filter",
+									"dependsOn": [
+										{
+											"activity": "Get files present",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"userProperties": [],
+									"typeProperties": {
+										"items": {
+											"value": "@activity('Get files present').output.childItems",
+											"type": "Expression"
+										},
+										"condition": {
+											"value": "@not(endswith(item().name,'.csv'))",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "Execute Delete Pipeline",
+									"type": "ExecutePipeline",
+									"dependsOn": [
+										{
+											"activity": "Filters all files except CSV",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"pipeline": {
+											"referenceName": "Pl18_FOREACH_DELETION_ADLS",
+											"type": "PipelineReference"
+										},
+										"waitOnCompletion": true,
+										"parameters": {
+											"fileList": {
+												"value": "@activity('Filters all files except CSV').output.value",
+												"type": "Expression"
+											}
+										}
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"Action": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-03-16T08:01:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

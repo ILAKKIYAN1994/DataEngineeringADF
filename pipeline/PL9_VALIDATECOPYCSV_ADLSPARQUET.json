@@ -1,0 +1,90 @@
+{
+	"name": "PL9_VALIDATECOPYCSV_ADLSPARQUET",
+	"properties": {
+		"description": "We used csv file as an input folder in ADLS and copied the data to ADLS in Parquet format. However we added Validation activity before copy so that we can set the copy activity to follow the success of validation. Activity Used: Validation, Copy Data",
+		"activities": [
+			{
+				"name": "File Exists or Not",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DS9_ADLSCSV_INPUT",
+						"type": "DatasetReference"
+					},
+					"timeout": "0.00:01:00",
+					"sleep": 10,
+					"childItems": true
+				}
+			},
+			{
+				"name": "CPY_CSV_PARQUET",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "File Exists or Not",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS9_ADLSCSV_INPUT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS9_PARQUET_OUTPUT",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-03-13T13:34:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

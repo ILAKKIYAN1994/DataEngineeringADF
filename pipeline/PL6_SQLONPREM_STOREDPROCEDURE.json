@@ -1,0 +1,45 @@
+{
+	"name": "PL6_SQLONPREM_STOREDPROCEDURE",
+	"properties": {
+		"description": "We created table and stored procedure in local SQL and push data into SQL table using Stored Procedure in ADF. Activity Used: Stored Procedure",
+		"activities": [
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertCustomer]",
+					"storedProcedureParameters": {
+						"CustomerID": {
+							"value": "11720",
+							"type": "Int32"
+						},
+						"FirstName": {
+							"value": "ILAKKIYAN",
+							"type": "String"
+						},
+						"LastName": {
+							"value": "A V",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS6_SQL_ONPREM_LINKED_INPUTOUTPUT",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-03-11T08:39:43Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

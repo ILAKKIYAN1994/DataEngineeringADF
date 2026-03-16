@@ -1,0 +1,21 @@
+{
+	"name": "LS6_SQL_ONPREM_LINKED_INPUTOUTPUT",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "localhost\\SQLEXPRESS",
+			"database": "Azure1",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "azure",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyYzAwNjRmZi0xMDRlLTQ4OGMtODkwOS1kYWQ2ODIzNDhhMGEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IR-SELF-AZURE1DB",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

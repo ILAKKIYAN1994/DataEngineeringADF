@@ -1,0 +1,9 @@
+{
+	"name": "adflearndp700",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "16c8bdbc-66b5-4047-a72c-f1fcf8dfa5ca",
+		"tenantId": "b75c010b-9cbc-4c21-ac53-6b2b3e3d421a"
+	}
+}

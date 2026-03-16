@@ -1,0 +1,42 @@
+{
+	"name": "PL11_LOOKUP_ADLSCSV",
+	"properties": {
+		"description": "We used csv file as an input folder in ADLS and used Lookup activity to view the files present in it. Activity Used: Lookup",
+		"activities": [
+			{
+				"name": "Look the csv file",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DS11_ADLSCSV_INPUT",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-03-15T06:05:00Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
