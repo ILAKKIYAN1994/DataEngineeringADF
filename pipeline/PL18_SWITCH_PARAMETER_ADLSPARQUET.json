@@ -149,7 +149,7 @@
 									"userProperties": [],
 									"typeProperties": {
 										"pipeline": {
-											"referenceName": "Pl18_FOREACH_DELETION_ADLS",
+											"referenceName": "PL18_FOREACH_DELETION_ADLS",
 											"type": "PipelineReference"
 										},
 										"waitOnCompletion": true,
