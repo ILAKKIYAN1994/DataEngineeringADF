@@ -910,6 +910,81 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL18_FOREACH_DELETION_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Loop non CSV files",
+						"type": "ForEach",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@pipeline().parameters.fileList",
+								"type": "Expression"
+							},
+							"activities": [
+								{
+									"name": "Delete non CSV files",
+									"type": "Delete",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"dataset": {
+											"referenceName": "DS18_ADLSFOLDER_INPUT",
+											"type": "DatasetReference",
+											"parameters": {}
+										},
+										"logStorageSettings": {
+											"linkedServiceName": {
+												"referenceName": "LS18_PARQUET_OUTPUT",
+												"type": "LinkedServiceReference"
+											},
+											"path": "pl18output"
+										},
+										"enableLogging": true,
+										"storeSettings": {
+											"type": "AzureBlobFSReadSettings",
+											"recursive": true,
+											"wildcardFileName": {
+												"value": "@item().name",
+												"type": "Expression"
+											},
+											"enablePartitionDiscovery": false
+										}
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"fileList": {
+						"type": "array",
+						"defaultValue": []
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-03-16T08:01:36Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS18_ADLSFOLDER_INPUT')]",
+				"[concat(variables('factoryId'), '/linkedServices/LS18_PARQUET_OUTPUT')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL18_SWITCH_PARAMETER_ADLSPARQUET')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1065,7 +1140,7 @@
 											"userProperties": [],
 											"typeProperties": {
 												"pipeline": {
-													"referenceName": "Pl18_FOREACH_DELETION_ADLS",
+													"referenceName": "PL18_FOREACH_DELETION_ADLS",
 													"type": "PipelineReference"
 												},
 												"waitOnCompletion": true,
@@ -1097,7 +1172,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS18_ADLSFOLDER_INPUT')]",
 				"[concat(variables('factoryId'), '/datasets/DS18_PARQUET_OUTPUT')]",
-				"[concat(variables('factoryId'), '/pipelines/Pl18_FOREACH_DELETION_ADLS')]"
+				"[concat(variables('factoryId'), '/pipelines/PL18_FOREACH_DELETION_ADLS')]"
 			]
 		},
 		{
@@ -2241,81 +2316,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS9_ADLSCSV_INPUT')]",
 				"[concat(variables('factoryId'), '/datasets/DS9_PARQUET_OUTPUT')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Pl18_FOREACH_DELETION_ADLS')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Loop non CSV files",
-						"type": "ForEach",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@pipeline().parameters.fileList",
-								"type": "Expression"
-							},
-							"activities": [
-								{
-									"name": "Delete non CSV files",
-									"type": "Delete",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"dataset": {
-											"referenceName": "DS18_ADLSFOLDER_INPUT",
-											"type": "DatasetReference",
-											"parameters": {}
-										},
-										"logStorageSettings": {
-											"linkedServiceName": {
-												"referenceName": "LS18_PARQUET_OUTPUT",
-												"type": "LinkedServiceReference"
-											},
-											"path": "pl18output"
-										},
-										"enableLogging": true,
-										"storeSettings": {
-											"type": "AzureBlobFSReadSettings",
-											"recursive": true,
-											"wildcardFileName": {
-												"value": "@item().name",
-												"type": "Expression"
-											},
-											"enablePartitionDiscovery": false
-										}
-									}
-								}
-							]
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"fileList": {
-						"type": "array",
-						"defaultValue": []
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-03-16T08:01:36Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS18_ADLSFOLDER_INPUT')]",
-				"[concat(variables('factoryId'), '/linkedServices/LS18_PARQUET_OUTPUT')]"
 			]
 		},
 		{
