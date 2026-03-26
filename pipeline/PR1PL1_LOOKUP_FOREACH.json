@@ -32,7 +32,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEachSQLTable",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -48,6 +48,7 @@
 						"value": "@activity('LKUP_SQL_WATERMARK_TABLE').output.value",
 						"type": "Expression"
 					},
+					"isSequential": false,
 					"activities": [
 						{
 							"name": "EXEC_SQL_INCREMENTAL_PIPELINE",

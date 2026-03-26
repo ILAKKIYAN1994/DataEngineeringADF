@@ -5,14 +5,6 @@
 			"referenceName": "LSPR1_SQL_SERVER_INPUT",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"schemaname": {
-				"type": "string"
-			},
-			"tablename": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "SqlServerTable",
 		"schema": [

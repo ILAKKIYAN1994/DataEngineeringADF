@@ -94,10 +94,6 @@
 									"referenceName": "DSPR1_SQL_SERVER_INPUT",
 									"type": "DatasetReference",
 									"parameters": {
-										"schemaname": {
-											"value": "@pipeline().parameters.TableSchema",
-											"type": "Expression"
-										},
 										"tablename": {
 											"value": "@pipeline().parameters.TableName",
 											"type": "Expression"
