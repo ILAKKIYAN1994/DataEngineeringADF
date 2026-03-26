@@ -27,7 +27,8 @@
 			}
 		],
 		"typeProperties": {
-			"schema": ""
+			"schema": "dbo",
+			"table": "ADF_Watermark_Table"
 		}
 	}
 }
