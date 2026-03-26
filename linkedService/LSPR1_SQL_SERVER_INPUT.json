@@ -1,0 +1,21 @@
+{
+	"name": "LSPR1_SQL_SERVER_INPUT",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "localhost\\SQLEXPRESS",
+			"database": "SQLONPREMMIGRATION",
+			"encrypt": "optional",
+			"trustServerCertificate": true,
+			"authenticationType": "SQL",
+			"userName": "Azure",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2NjIzNTJkZi05MzExLTRjMmQtYjAzYS0xZjNlNGY1MjNmYTQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IR-SELF-AZURE1DB",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
