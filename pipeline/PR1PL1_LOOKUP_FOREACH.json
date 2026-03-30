@@ -25,7 +25,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "DSPR1_SQL_SERVER_INPUT",
+						"referenceName": "DS1PR1_LOOKUP_WATERMRK",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
@@ -57,6 +57,7 @@
 							"policy": {
 								"secureInput": false
 							},
+							"userProperties": [],
 							"typeProperties": {
 								"pipeline": {
 									"referenceName": "PR1PL2_CHILDPIPE_INCREMENTAL",
