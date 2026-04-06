@@ -26,17 +26,6 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"dataset": {
-									"referenceName": "DS18_ADLSFOLDER_INPUT",
-									"type": "DatasetReference"
-								},
-								"logStorageSettings": {
-									"linkedServiceName": {
-										"referenceName": "LS18_PARQUET_OUTPUT",
-										"type": "LinkedServiceReference"
-									},
-									"path": "pl18output"
-								},
 								"enableLogging": true,
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",

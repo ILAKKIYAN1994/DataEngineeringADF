@@ -31,10 +31,6 @@
 							"type": "String"
 						}
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "LS6_SQL_ONPREM_LINKED_INPUTOUTPUT",
-					"type": "LinkedServiceReference"
 				}
 			}
 		],

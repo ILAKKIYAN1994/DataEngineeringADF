@@ -36,10 +36,6 @@
 							}
 						}
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "LS1PR1_SQL_SERVER_UPDATE_WATERMRK",
-					"type": "LinkedServiceReference"
 				}
 			}
 		],

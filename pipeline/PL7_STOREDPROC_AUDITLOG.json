@@ -32,28 +32,8 @@
 							"fileExtension": ".txt"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "DS7_SQL_TABLE_INPUT",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "DS7_ADLS_CSV_OUTPUT",
-						"type": "DatasetReference"
-					}
-				]
+					"enableStaging": false
+				}
 			},
 			{
 				"name": "usp_audit_successlog",
@@ -107,10 +87,6 @@
 							"type": "String"
 						}
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "LS7_SQL_SP_INPUTOUTPUT",
-					"type": "LinkedServiceReference"
 				}
 			},
 			{
@@ -171,10 +147,6 @@
 							"type": "String"
 						}
 					}
-				},
-				"linkedServiceName": {
-					"referenceName": "LS7_SQL_SP_INPUTOUTPUT",
-					"type": "LinkedServiceReference"
 				}
 			}
 		],
